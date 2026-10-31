@@ -1,6 +1,6 @@
 "use client";
 
-import { SolanaCheckout } from "@alexasomba/payload-solana/react";
+import { SolanaCheckout } from "payload-solana/react";
 import { useState } from "react";
 
 export default function Home() {

@@ -1,10 +1,10 @@
-# @alexasomba/payload-solana
+# payload-solana
 
 Non-custodial SPL-token checkout for Payload CMS 3.
 
 ## Install
 
-pnpm add @alexasomba/payload-solana
+pnpm add payload-solana
 
 ## Configure
 
@@ -14,10 +14,10 @@ The plugin creates a Payload payment request, stores its reference and expected 
 
 ## Entry points
 
-- @alexasomba/payload-solana — Payload plugin and option types
-- @alexasomba/payload-solana/server — read-only Solana payment helpers
-- @alexasomba/payload-solana/react — Solana Pay QR and checkout component
-- @alexasomba/payload-solana/admin — Payload admin view and navigation link
+- payload-solana — Payload plugin and option types
+- payload-solana/server — read-only Solana payment helpers
+- payload-solana/react — Solana Pay QR and checkout component
+- payload-solana/admin — Payload admin view and navigation link
 
 ## Compatibility
 

@@ -1,9 +1,9 @@
 # Installation
 
-Install @alexasomba/payload-solana in a Payload CMS 3 application and register solanaPaymentsPlugin in the plugins array.
+Install payload-solana in a Payload CMS 3 application and register solanaPaymentsPlugin in the plugins array.
 
 ```ts
-import { solanaPaymentsPlugin } from "@alexasomba/payload-solana";
+import { solanaPaymentsPlugin } from "payload-solana";
 
 export default buildConfig({
   plugins: [
@@ -33,7 +33,7 @@ export default buildConfig({
 Render a QR and wallet deep link from a client component:
 
 ```tsx
-import { SolanaCheckout } from "@alexasomba/payload-solana/react";
+import { SolanaCheckout } from "payload-solana/react";
 
 <SolanaCheckout orderId={order.id} />
 ```

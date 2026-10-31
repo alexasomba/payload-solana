@@ -6,7 +6,7 @@ The repository contains the publishable package, a Payload demo application, and
 
 ## Install
 
-pnpm add @alexasomba/payload-solana
+pnpm add payload-solana
 
 ## Package entry points
 

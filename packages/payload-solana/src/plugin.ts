@@ -239,14 +239,14 @@ export function solanaPaymentsPlugin(options: SolanaPluginOptions) {
           ...config.admin?.components,
           beforeNavLinks: [
             ...(config.admin?.components?.beforeNavLinks ?? []),
-            { path: "@alexasomba/payload-solana/admin#SolanaAdminNav" },
+            { path: "payload-solana/admin#SolanaAdminNav" },
           ],
           views: {
             ...config.admin?.components?.views,
             solanaPayments: {
               path: "/solana-payments",
               Component: {
-                path: "@alexasomba/payload-solana/admin#SolanaAdmin",
+                path: "payload-solana/admin#SolanaAdmin",
                 serverProps: { collectionSlug: slug },
               },
             },

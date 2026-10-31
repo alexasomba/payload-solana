@@ -1,6 +1,6 @@
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
-import { solanaPaymentsPlugin } from "@alexasomba/payload-solana";
+import { solanaPaymentsPlugin } from "payload-solana";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildConfig, type CollectionConfig } from "payload";

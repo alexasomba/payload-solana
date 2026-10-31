@@ -1,5 +1,5 @@
 {
-  "name": "@alexasomba/payload-solana",
+  "name": "payload-solana",
   "version": "0.1.0",
   "description": "Non-custodial SPL-token payments for Payload CMS",
   "author": "Alex Asomba",

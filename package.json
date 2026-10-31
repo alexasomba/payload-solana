@@ -4,9 +4,9 @@
   "version": "0.1.0",
   "packageManager": "pnpm@12.16.1",
   "scripts": {
-    "build": "pnpm --filter @alexasomba/payload-solana build",
-    "test": "pnpm --filter @alexasomba/payload-solana test",
-    "typecheck": "pnpm --filter @alexasomba/payload-solana typecheck",
+    "build": "pnpm --filter payload-solana build",
+    "test": "pnpm --filter payload-solana test",
+    "typecheck": "pnpm --filter payload-solana typecheck",
     "check": "pnpm build && pnpm typecheck && pnpm test && pnpm --filter payload-solana-demo typecheck"
   },
   "devDependencies": {
