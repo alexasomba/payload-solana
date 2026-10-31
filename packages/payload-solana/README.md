@@ -19,9 +19,13 @@ The plugin creates a Payload payment request, stores its reference and expected 
 - payload-solana/react — Solana Pay QR and checkout component
 - payload-solana/admin — Payload admin view and navigation link
 
+## Use with an existing order flow
+
+Import the server entry point when your application already owns its ecommerce transactions, order finalization, inventory checks, or recovery policy. It exports read-only request and verification helpers plus the `SOLANA_USDT` preset and error guard. Keep checkout totals and settlement in the application's Payload payment adapter. The standalone plugin collection and routes are optional and should not become a second order ledger.
+
 ## Compatibility
 
-Payload 3.79.1 or newer, React 19.2.1 or newer, Node.js 22 or newer.
+Payload 3.79.1 or newer, or Payload 4.0.0-beta.6 or newer; React 19.2.1 or newer; Node.js 22 or newer.
 
 ## License
 

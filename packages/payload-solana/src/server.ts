@@ -1,7 +1,10 @@
 import {
   createReadOnlySolanaPayments,
   formatTokenAmount,
+  isSolanaPaymentsError,
   parseTokenAmount,
+  SOLANA_USDT,
+  SolanaPaymentsError,
   type Commitment,
   type SolanaPaymentsReadOnlyClient,
   type SolanaToken,
@@ -10,7 +13,14 @@ import type { SolanaPluginOptions } from "./types.js";
 import { resolveRpcUrl, resolveToken, validateTokenAmount } from "./internal/shared.js";
 
 export type { Commitment, SolanaPaymentsReadOnlyClient, SolanaToken };
-export { createReadOnlySolanaPayments, formatTokenAmount, parseTokenAmount };
+export {
+  createReadOnlySolanaPayments,
+  formatTokenAmount,
+  isSolanaPaymentsError,
+  parseTokenAmount,
+  SOLANA_USDT,
+  SolanaPaymentsError,
+};
 
 export function createPayloadSolanaPayments(options: SolanaPluginOptions): SolanaPaymentsReadOnlyClient {
   return createReadOnlySolanaPayments({
@@ -50,15 +60,20 @@ export function createSolanaPaymentRequest(
 export async function verifySolanaPayment(
   client: SolanaPaymentsReadOnlyClient,
   input: {
-    reference: string;
+    reference?: string;
     signature?: string;
     recipient: string;
     amount: string;
     decimals: number;
+    allowMissingReference?: boolean;
   },
 ) {
+  const reference = input.allowMissingReference && input.signature ? undefined : input.reference;
+  if (!reference && !(input.allowMissingReference && input.signature)) {
+    throw new Error("A Solana payment reference is required unless signature recovery is enabled.");
+  }
   return client.payments.verify({
-    reference: input.reference,
+    reference,
     signature: input.signature,
     recipient: input.recipient,
     amount: validateTokenAmount(input.amount, input.decimals),

@@ -72,6 +72,70 @@ describe("Solana payment helpers", () => {
     });
   });
 
+  it("supports a signed-transaction recovery hint without dropping recipient and amount checks", async () => {
+    const verify = vi.fn().mockResolvedValue({
+      found: true,
+      signature: "fixture-signature",
+      confirmationStatus: "finalized",
+    });
+    const client = {
+      payments: { verify },
+      balances: {},
+      transactions: {},
+    } as never;
+
+    const result = await verifySolanaPayment(client, {
+      signature: "fixture-signature",
+      allowMissingReference: true,
+      recipient: "11111111111111111111111111111111",
+      amount: "3.5",
+      decimals: 6,
+    });
+
+    expect(result.found).toBe(true);
+    expect(verify).toHaveBeenCalledWith({
+      reference: undefined,
+      signature: "fixture-signature",
+      recipient: "11111111111111111111111111111111",
+      amount: "3.5",
+      maxPages: 3,
+      limit: 20,
+    });
+  });
+
+  it("requires a reference or a bounded signature recovery hint", async () => {
+    const verify = vi.fn();
+    const client = {
+      payments: { verify },
+      balances: {},
+      transactions: {},
+    } as never;
+
+    await expect(verifySolanaPayment(client, {
+      recipient: "11111111111111111111111111111111",
+      amount: "3.5",
+      decimals: 6,
+    })).rejects.toThrow("reference is required unless signature recovery is enabled");
+    expect(verify).not.toHaveBeenCalled();
+  });
+
+  it("does not perform signature-only recovery unless explicitly enabled", async () => {
+    const verify = vi.fn();
+    const client = {
+      payments: { verify },
+      balances: {},
+      transactions: {},
+    } as never;
+
+    await expect(verifySolanaPayment(client, {
+      signature: "fixture-signature",
+      recipient: "11111111111111111111111111111111",
+      amount: "3.5",
+      decimals: 6,
+    })).rejects.toThrow("signature recovery is enabled");
+    expect(verify).not.toHaveBeenCalled();
+  });
+
   it("keeps missing, failed, or mismatched transfers pending", async () => {
     const verify = vi.fn().mockResolvedValue({
       found: false,

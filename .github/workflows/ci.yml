@@ -8,6 +8,10 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        payload-version: ["3.92.1", "4.0.0-beta.6"]
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -18,4 +22,14 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm check
+      - name: Select Payload version for compatibility check
+        run: pnpm --filter payload-solana add -D payload@${{ matrix.payload-version }} @payloadcms/ui@${{ matrix.payload-version }}
+      - name: Check plugin package
+        run: |
+          if [ "${{ matrix.payload-version }}" = "3.92.1" ]; then
+            pnpm check
+          else
+            pnpm --filter payload-solana build
+            pnpm --filter payload-solana typecheck
+            pnpm --filter payload-solana test
+          fi
