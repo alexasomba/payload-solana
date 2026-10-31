@@ -1,0 +1,67 @@
+{
+  "name": "@alexasomba/payload-solana",
+  "version": "0.1.0",
+  "description": "Non-custodial SPL-token payments for Payload CMS",
+  "author": "Alex Asomba",
+  "homepage": "https://github.com/alexasomba/payload-solana#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexasomba/payload-solana.git",
+    "directory": "packages/payload-solana"
+  },
+  "bugs": { "url": "https://github.com/alexasomba/payload-solana/issues" },
+  "keywords": ["payloadcms", "payload-plugin", "solana", "spl-token", "payments", "typescript"],
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "files": ["dist", "README.md", "LICENSE"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./server": {
+      "types": "./dist/server.d.ts",
+      "import": "./dist/server.js"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.js"
+    },
+    "./admin": {
+      "types": "./dist/admin.d.ts",
+      "import": "./dist/admin.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "prepack": "pnpm build"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "peerDependencies": {
+    "@payloadcms/ui": ">=3.79.1 <4",
+    "payload": ">=3.79.1 <4",
+    "react": ">=19.2.1 <20",
+    "react-dom": ">=19.2.1 <20"
+  },
+  "dependencies": {
+    "qrcode.react": "^4.2.0",
+    "solana-payments": "^1.1.1"
+  },
+  "devDependencies": {
+    "@payloadcms/ui": "^3.92.1",
+    "payload": "^3.92.1",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
